@@ -33,4 +33,18 @@ increases the banks confidence in their management skills, therefore making appr
 - Users can run their own projections
 - Application will provide organized reports and visuals to show to financial institutions
 
+## User Stories
+
+- As a user, I want to be able to add new projects (requiring debt) to a debt projection, allowing me to see how 
+payments on this potential new debt will impact my future cash flows, and how these payments will change at different 
+interest rates.
+- As a user, I want to be able to view a list of my existing debt, with each loan displaying the date it was funded, 
+the date it will mature, interest rate & term, initial loan amount, and amount remaining to be paid.
+- As a user, I want to be able to store information from past financial statements.
+- As a user, I want the system to use stored information to automatically generate a projection of my future cash
+flows, while giving me the ability to modify aspects of this projection.
+- As a user, I want to be able to create a visualization/report of my business’s current financial health and any
+projections I create for potential new debt.
+
+
  
