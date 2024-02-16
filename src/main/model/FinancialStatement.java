@@ -10,9 +10,10 @@ public class FinancialStatement {
     private double depExp;
     private double intExp;
     private double taxExp;
-    private double debtRepaid;
+    private double principleRepaid;
 
     //REQUIRES: Year be a valid year in the format YYYY
+    //EFFECTS: initializes FinancialStatement with year field set to given year
     public FinancialStatement(int year) {
         this.fiscalYear = year;
     }
@@ -20,14 +21,13 @@ public class FinancialStatement {
     //REQUIRES: debtRepaid + interestExpense != 0
     //EFFECTS: calculates debt service coverage ratio (EBITDA / interestExpense + debtRepaid)
     public double calcDSC() {
-        double result = calcEbitda() / (intExp + debtRepaid);
-        double rounded = Math.round(result * 100.0) / 100.0;
-        return rounded;
+        double result = calcEbitda() / (intExp + principleRepaid);
+        return Math.round(result * 100.0) / 100.0;
     }
 
     //EFFECTS: calculates net income left over after debt repayment
     public double calcFreeCashFlow() {
-        return Math.round(calcEbitda() - debtRepaid - intExp);
+        return Math.round(calcEbitda() - principleRepaid - intExp);
     }
 
     //EFFECTS: calculates Earnings Before Interest Tax and Depreciation/Amortization
@@ -57,8 +57,8 @@ public class FinancialStatement {
         return this.taxExp;
     }
 
-    public double getDebtRepaid() {
-        return this.debtRepaid;
+    public double getPrincipleRepaid() {
+        return this.principleRepaid;
     }
 
     public void setFiscalYear(int year) {
@@ -81,7 +81,7 @@ public class FinancialStatement {
         this.taxExp = taxExp;
     }
 
-    public void setDebtRepaid(double debtRepaid) {
-        this.debtRepaid = debtRepaid;
+    public void setPrincipleRepaid(double principleRepaid) {
+        this.principleRepaid = principleRepaid;
     }
 }

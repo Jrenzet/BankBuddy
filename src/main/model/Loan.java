@@ -11,6 +11,8 @@ public class Loan {
     private boolean isProjection;
     private String description;
 
+    //EFFECTS: initializes loan with description of purpose, and a boolean true if the loan represents a
+    // projection, false if it represents a loan that currently exists.
     public Loan(String description, Boolean isProjection) {
         this.description = description;
         this.isProjection = isProjection;

@@ -19,39 +19,39 @@ class FinancialStatementTest {
         testStmt1.setDepExp(5000);
         testStmt1.setIntExp(1000);
         testStmt1.setTaxExp(4000);
-        testStmt1.setDebtRepaid(14000);
+        testStmt1.setPrincipleRepaid(14000);
 
         testStmt2 = new FinancialStatement(2024);
         testStmt2.setNetInc(19999);
         testStmt2.setDepExp(10000.55);
         testStmt2.setIntExp(10000);
         testStmt2.setTaxExp(10000);
-        testStmt2.setDebtRepaid(15001);
+        testStmt2.setPrincipleRepaid(15001);
 
         testStmt3 = new FinancialStatement(2024);
         testStmt3.setNetInc(20000);
         testStmt3.setDepExp(10000);
         testStmt3.setIntExp(10000);
         testStmt3.setTaxExp(10000);
-        testStmt3.setDebtRepaid(23331);
+        testStmt3.setPrincipleRepaid(23331);
 
         testStmt4 = new FinancialStatement(2024);
         testStmt4.setNetInc(20000);
         testStmt4.setDepExp(10000);
         testStmt4.setIntExp(10000);
         testStmt4.setTaxExp(10000);
-        testStmt4.setDebtRepaid(23336);
+        testStmt4.setPrincipleRepaid(23336);
     }
 
     @Test
-    public void testEbitda() {
+    public void testCalcEbitda() {
         assertEquals(20000.0, testStmt1.calcEbitda());
         assertEquals(50000.0, testStmt2.calcEbitda());
         assertEquals(50000.0, testStmt3.calcEbitda());
     }
 
     @Test
-    public void testDSC() {
+    public void testCalcDSC() {
         assertEquals(1.33, testStmt1.calcDSC()); //test with repeating decimals
         assertEquals(2.00, testStmt2.calcDSC()); //round up from 1.999
         assertEquals(1.50, testStmt3.calcDSC()); //round down from 1.5001
