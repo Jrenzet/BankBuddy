@@ -20,14 +20,14 @@ public class FinancialStatement {
     //REQUIRES: debtRepaid + interestExpense != 0
     //EFFECTS: calculates debt service coverage ratio (EBITDA / interestExpense + debtRepaid)
     public double calcDSC() {
-        double result = calcEbitda() / debtRepaid;
+        double result = calcEbitda() / (intExp + debtRepaid);
         double rounded = Math.round(result * 100.0) / 100.0;
         return rounded;
     }
 
     //EFFECTS: calculates net income left over after debt repayment
     public double calcFreeCashFlow() {
-        return Math.round(calcEbitda() - debtRepaid);
+        return Math.round(calcEbitda() - debtRepaid - intExp);
     }
 
     //EFFECTS: calculates Earnings Before Interest Tax and Depreciation/Amortization

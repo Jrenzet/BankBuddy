@@ -16,14 +16,15 @@ public class Loan {
         this.isProjection = isProjection;
     }
 
+    //REQUIRES: remainingTerm > 0 && interestRate > 0
     //EFFECTS: calculates the current monthly payment on this loan, rounded to the nearest dollar
     public double calculateMonthlyPayment() {
-
         double result = (this.currentBalance * (this.interestRate / 1200))
                 / (1 - Math.pow((1 + (this.interestRate / 1200)), -this.remainingTerm));
         return Math.round(result);
     }
 
+    //REQUIRES: remainingTerm > 0 && interestRate > 0
     //EFFECTS: calculate 12 months of payments if remainingTerm  > 12, remainingTerm # of payments if remainingTerm < 12
     public double calculateAnnualPayment() {
         if (this.remainingTerm > 12) {
