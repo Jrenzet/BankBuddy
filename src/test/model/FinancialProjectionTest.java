@@ -25,7 +25,7 @@ public class FinancialProjectionTest {
     @BeforeEach
     public void setup() {
 
-        testProj1 = new FinancialProjection("Test Projection");
+        testProj1 = new FinancialProjection();
 
         testStmt1 = new FinancialStatement(2024);
         testStmt1.setNetInc(10000);
@@ -67,11 +67,11 @@ public class FinancialProjectionTest {
         testStmt6.setIntExp(0);
         testStmt6.setTaxExp(0);
 
-        testLoan1 = new Loan("property", false);
-        testLoan2 = new Loan("almost paid", false);
-        testLoan3 = new Loan("vehicle", true);
-        testLoan4 = new Loan("projected machine", true);
-        testLoan5 = new Loan("old loan", false);
+        testLoan1 = new Loan("property");
+        testLoan2 = new Loan("almost paid");
+        testLoan3 = new Loan("vehicle");
+        testLoan4 = new Loan("projected machine");
+        testLoan5 = new Loan("old loan");
 
         testLoan1.setInterestRate(5.55);
         testLoan2.setInterestRate(6.0);

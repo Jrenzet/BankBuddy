@@ -15,11 +15,11 @@ public class LoanTest {
 
     @BeforeEach
     public void setup() {
-        testLoan1 = new Loan("property", false);
-        testLoan2 = new Loan("almost paid", false);
-        testLoan3 = new Loan("vehicle", false);
-        testLoan4 = new Loan("projected machine", true);
-        testLoan5 = new Loan("old loan", false);
+        testLoan1 = new Loan("property");
+        testLoan2 = new Loan("almost paid");
+        testLoan3 = new Loan("vehicle");
+        testLoan4 = new Loan("projected machine");
+        testLoan5 = new Loan("old loan");
 
         testLoan1.setInterestRate(5.55);
         testLoan2.setInterestRate(6.0);

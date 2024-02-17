@@ -7,13 +7,11 @@ import java.util.List;
 // with projected loan payments based off of total payments of a list of loans, to calculate projected DSC
 public class FinancialProjection {
 
-    private String name;
     private List<Loan> loans;
     private List<FinancialStatement> statements;
 
 
-    public FinancialProjection(String name) {
-        this.name = name;
+    public FinancialProjection() {
         loans = new ArrayList<>();
         statements = new ArrayList<>();
     }
@@ -84,14 +82,6 @@ public class FinancialProjection {
     }
 
     //getters & setters
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Loan> getLoans() {
         return loans;
