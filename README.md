@@ -28,13 +28,11 @@ could be very useful for some business owners.
 
 ## User Stories
 
-- As a user, I want to be able to add new loans to a projection, allowing me to see how 
-payments on this potential new debt will impact my future cash flows, and how these payments will change at different 
-interest rates.
-- As a user, I want to be able to view a summary of my existing debt, with key information for each loan
-- As a user, I want to be able to store information from past financial statements.
-- As a user, I want the system to use stored information to automatically generate a projection of my future cash
-flows, while giving me the ability to modify aspects of this projection.
+- As a user, I want to be able to add new loans to a financial projection.
+- As a user, I want to be able to view a list of my existing debt, with key information for each loan
+- As a user, I want to be able to store information from past financial statements for use in projections.
+- As a user, I want the system to use stored information to automatically generate a projection with my expected DSC,
+while giving me the ability to edit aspects of this projection (i.e. loans and financial statements).
 - As a user, I want to be able to generate a rating of my likelihood of being approved for new debt.
 
 
