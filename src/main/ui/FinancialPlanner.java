@@ -8,23 +8,30 @@ import java.util.Scanner;
 
 public class FinancialPlanner {
 
-    private Scanner input;
-    private FinancialProjection projection;
+    private final Scanner input;
+    private final FinancialProjection projection;
     private Loan selectedLoan;
     private FinancialStatement selectedStatement;
+    boolean running;
 
     public FinancialPlanner() {
         projection = new FinancialProjection();
         input = new Scanner(System.in);
+        running = true;
         runPlanner();
     }
 
     //EFFECTS: runs start up screen and takes user input
     public void runPlanner() {
-        while (true) {
+        while (running) {
             System.out.println("Financial Planner Home Page");
             options1();
-            inputHandlerHome(takeInputString());
+            String input = takeInputString();
+            if (input.equals("q")) {
+                running = false;
+            } else {
+                inputHandlerHome(input);
+            }
         }
     }
 
@@ -69,9 +76,6 @@ public class FinancialPlanner {
                 break;
             case "r":
                 reportsScreen();
-                break;
-            case "q":
-                System.exit(0);
                 break;
             default:
                 System.out.println("Please type a valid command\n");
