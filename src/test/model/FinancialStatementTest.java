@@ -67,4 +67,18 @@ class FinancialStatementTest {
 
     }
 
+    @Test
+    public void testFiscalYear() {
+        testStmt1.setFiscalYear(2001);
+        assertEquals(2001, testStmt1.getFiscalYear());
+    }
+
+    @Test
+    public void testGetters() {
+        assertEquals(10000, testStmt1.getNetInc());
+        assertEquals(5000, testStmt1.getDepExp());
+        assertEquals(1000, testStmt1.getIntExp());
+        assertEquals(4000, testStmt1.getTaxExp());
+        assertEquals(14000, testStmt1.getPrincipleRepaid());
+    }
 }

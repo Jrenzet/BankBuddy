@@ -63,4 +63,25 @@ public class LoanTest {
         assertEquals(3788.0 * 6, testLoan5.calculateAnnualPayment());
     }
 
+    @Test
+    public void testDescription() {
+        assertEquals("property", testLoan1.getDescription());
+        testLoan1.setDescription("house");
+        assertEquals("house", testLoan1.getDescription());
+    }
+
+    @Test
+    public void testGetters() {
+        assertEquals(5.55, testLoan1.getInterestRate());
+        assertEquals(300, testLoan1.getRemainingTerm());
+        assertEquals(100000, testLoan1.getCurrentBalance());
+    }
+
+    @Test
+    public void testIsProjection() {
+        testLoan1.setProjection(true);
+        testLoan2.setProjection(false);
+        assertTrue(testLoan1.isProjection());
+        assertFalse(testLoan2.isProjection());
+    }
 }
