@@ -21,7 +21,7 @@ public class FinancialPlanner {
         runPlanner();
     }
 
-    //EFFECTS: runs start up screen and takes user input
+    //EFFECTS: runs home screen and takes user input
     public void runPlanner() {
         while (running) {
             System.out.println("Financial Planner Home Page");
@@ -35,7 +35,7 @@ public class FinancialPlanner {
         }
     }
 
-    //EFFECTS: displays user input options on homepage
+    //EFFECTS: displays user input options on home screen
     public void options1() {
         System.out.println("Press 'l' to edit/input loans.");
         System.out.println("Press 's' to edit/input financial statements.");
@@ -93,11 +93,11 @@ public class FinancialPlanner {
     public void options2() {
         System.out.println("Press 'a' to add new loan.");
         System.out.println("Press 'e' to edit existing loans.");
+        System.out.println("Press 'r' to remove a loan.");
         System.out.println("Press 'm' to exit to menu.");
     }
 
-
-    //EFFECTS: handles user input from home screen
+    //EFFECTS: handles user input from loan screen
     public void inputHandlerLoan(String input) {
         switch (input) {
             case "a":
@@ -106,6 +106,8 @@ public class FinancialPlanner {
             case "e":
                 editLoanScreen();
                 break;
+            case "r":
+                remove("loan");
             case "m":
                 runPlanner();
                 break;
@@ -152,6 +154,7 @@ public class FinancialPlanner {
         loan.setCurrentBalance(takeInputDouble());
     }
 
+    //REQUIRES: user inputs int for loan number
     //MODIFIES: this
     //EFFECTS: allows user to select and edit an existing loan
     public void editLoanScreen() {
@@ -184,11 +187,11 @@ public class FinancialPlanner {
     public void options3() {
         System.out.println("Press 'a' to add new statement.");
         System.out.println("Press 'e' to edit existing statements.");
+        System.out.println("Press 'r' to remove a statement.");
         System.out.println("Press 'm' to exit to menu.");
     }
 
-
-    //EFFECTS: handles user input from home screen
+    //EFFECTS: handles user input from financial statement screen
     public void inputHandlerStatement(String input) {
         switch (input) {
             case "a":
@@ -196,6 +199,9 @@ public class FinancialPlanner {
                 break;
             case "e":
                 editStatementScreen();
+                break;
+            case "r":
+                remove("statement");
                 break;
             case "m":
                 runPlanner();
@@ -207,6 +213,7 @@ public class FinancialPlanner {
         }
     }
 
+    //REQUIRES: user inputs int for statement number
     //EFFECTS: execute statement editing
     public void editStatementScreen() {
         System.out.println("Enter number of statement to be edited:");
@@ -261,42 +268,63 @@ public class FinancialPlanner {
         }
     }
 
+    //REQUIRES: user inputs int
+    //MODIFIES: this
+    //EFFECTS: updates statement year in statements according to user input
     public void updateStatementYear() {
         System.out.println("Input updated year:");
         selectedStatement.setFiscalYear(takeInputInt());
         System.out.println("Year updated to " + selectedStatement.getFiscalYear());
     }
 
+    //REQUIRES: user inputs double
+    //MODIFIES: this
+    //EFFECTS: updates statement net income in statements according to user input
     public void updateStatementIncome() {
         System.out.println("Input updated income:");
         selectedStatement.setNetInc(takeInputDouble());
         System.out.println("Income updated to $" + selectedStatement.getNetInc());
     }
 
+    //REQUIRES: user inputs double
+    //MODIFIES: this
+    //EFFECTS: updates statement depreciation expense in statements according to user input
     public void updateStatementDep() {
         System.out.println("Input updated depreciation:");
         selectedStatement.setDepExp(takeInputDouble());
         System.out.println("Depreciation expense updated to $" + selectedStatement.getDepExp());
     }
 
+    //REQUIRES: user inputs double
+    //MODIFIES: this
+    //EFFECTS: updates statement interest expense in statements according to user input
     public void updateStatementInt() {
         System.out.println("Input updated interest:");
         selectedStatement.setIntExp(takeInputDouble());
         System.out.println("Interest expense updated to $" + selectedStatement.getIntExp());
     }
 
+    //REQUIRES: user inputs double
+    //MODIFIES: this
+    //EFFECTS: updates statement tax expense in statements according to user input
     public void updateStatementTax() {
         System.out.println("Input updated tax:");
         selectedStatement.setTaxExp(takeInputDouble());
         System.out.println("Tax expense updated to $" + selectedStatement.getTaxExp());
     }
 
+    //REQUIRES: user inputs double
+    //MODIFIES: this
+    //EFFECTS: updates statement principle paid in statements according to user input
     public void updateStatementPrin() {
         System.out.println("Input updated principle:");
         selectedStatement.setTaxExp(takeInputDouble());
         System.out.println("Principal repaid updated to $" + selectedStatement.getPrincipleRepaid());
     }
 
+    //REQUIRES: user inputs integer for year, doubles for all else
+    //MODIFIES: this
+    //EFFECTS: adds financial statement to statements with users inputted values
     public void addStatementScreen() {
         System.out.println("Enter Statement Year: ");
         selectedStatement = new FinancialStatement(takeInputInt());
@@ -320,13 +348,14 @@ public class FinancialPlanner {
         inputHandlerReports(takeInputString());
     }
 
-
+    //EFFECTS displays user input options on report printing menu
     public void options4() {
         System.out.println("Press 'p' to print projection report");
         System.out.println("Press 'l' to print loan report.");
         System.out.println("Press 'm' to exit to menu.");
     }
 
+    //EFFECTS: handles user input on report printing menu
     public void inputHandlerReports(String input) {
         switch (input) {
             case "p":
@@ -363,6 +392,7 @@ public class FinancialPlanner {
         System.out.println("Interest Rate: " + printedLoan.getInterestRate() + "%\n");
     }
 
+    //REQUIRES: projection.totalPayment != 0
     //EFFECTS: prints summary of current projection
     public void printProjection() {
         System.out.println("****** PROJECTION SUMMARY ******\n");
@@ -386,9 +416,39 @@ public class FinancialPlanner {
         pauseForUser();
     }
 
+    // prompts user to input any key, giving them a chance to read over what was last printed
     public void pauseForUser() {
         System.out.println("Press any key to continue");
         takeInputString();
+    }
+
+    //REQUIRES: user inputs int && (removeType == "loan" || removeType == "statement")
+    //MODIFIES: this
+    //EFFECTS: removes a loan or statement from projection
+    public void remove(String removeType) {
+        System.out.println("Enter the number of the " + removeType + " to be removed.");
+        while (true) {
+            int userInput = takeInputInt() - 1;
+            if (removeType.equals("loan")) {
+                try {
+                    projection.removeLoan(projection.getLoans().get(userInput));
+                } catch (IndexOutOfBoundsException i) {
+                    System.out.println("Please enter valid loan number.");
+                    continue;
+                }
+                break;
+            }
+            if (removeType.equals("statement")) {
+                try {
+                    projection.removeStatement(projection.getStatements().get(userInput));
+                } catch (IndexOutOfBoundsException i) {
+                    System.out.println("Please enter valid statement number.");
+                    continue;
+                }
+                break;
+            }
+        }
+        System.out.println(removeType + " removed.");
     }
 }
 
