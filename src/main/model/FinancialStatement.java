@@ -89,6 +89,7 @@ public class FinancialStatement implements Writable {
     }
 
     @Override
+    //EFFECTS: returns this as a JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("fiscalYear", fiscalYear);

@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import persistance.Writable;
 
 import java.lang.Math;
-import java.nio.file.Watchable;
 
 //Represents a loan, with interest rate, term, and balance
 public class Loan implements Writable {
@@ -82,6 +81,7 @@ public class Loan implements Writable {
     }
 
     @Override
+    //EFFECTS: returns this as a JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("remainingTerm", remainingTerm);
