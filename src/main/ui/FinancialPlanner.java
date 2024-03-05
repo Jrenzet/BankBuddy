@@ -4,11 +4,14 @@ import model.FinancialProjection;
 import model.FinancialStatement;
 import model.Loan;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 // Displays console prompts for the user to input loans, financial statements, and run projections
+// Source Credits: JsonSerializationDemo project from CPSC 210 repository
 public class FinancialPlanner {
 
+    private static final String SAVE_PATH = "./data/financialProjection.json";
     private final Scanner input;
     private final FinancialProjection projection;
     private Loan selectedLoan;
@@ -40,8 +43,10 @@ public class FinancialPlanner {
     //EFFECTS: displays user input options on home screen
     public void options1() {
         System.out.println("Press 'l' to edit/input loans.");
-        System.out.println("Press 's' to edit/input financial statements.");
+        System.out.println("Press 'f' to edit/input financial statements.");
         System.out.println("Press 'r' to view analysis reports.");
+        System.out.println("Press 's' to save current projection");
+        System.out.println("Press 'lp' to load saved projection");
         System.out.println("Press 'q' to quit.");
     }
 
@@ -73,11 +78,17 @@ public class FinancialPlanner {
             case "l":
                 loanScreen();
                 break;
-            case "s":
+            case "f":
                 financialStatementScreen();
                 break;
             case "r":
                 reportsScreen();
+                break;
+            case "s":
+                saveProjection();
+                break;
+            case "lp":
+                loadProjection();
                 break;
             default:
                 System.out.println("Please type a valid command\n");
@@ -451,6 +462,16 @@ public class FinancialPlanner {
             }
         }
         System.out.println(removeType + " removed.");
+    }
+
+    //EFFECTS: saves current projection to ./data/financialProjection.json
+    private void saveProjection() {
+
+    }
+
+    //MODIFIES: this.projection
+    //EFFECTS: loads projection from ./data/financialProjection.json
+    private void loadProjection() {
     }
 }
 

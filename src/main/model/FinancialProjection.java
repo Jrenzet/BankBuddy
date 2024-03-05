@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistance.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a financial projection scenario that uses average EBITDA from a group of financial statements, along
 // with projected loan payments based off of total payments of a list of loans, to calculate projected DSC
-public class FinancialProjection {
+public class FinancialProjection implements Writable {
 
     private List<Loan> loans;
     private List<FinancialStatement> statements;
@@ -91,4 +95,35 @@ public class FinancialProjection {
         return statements;
     }
 
+
+    @Override
+    //EFFECTS: returns this as a JSON object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("loans", loansToJson());
+        json.put("statements", statementsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns loans in this financial projection as a JSON array
+    private JSONArray loansToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Loan l : loans) {
+            jsonArray.put(l.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns financial statements in this financial projection as a JSON array
+    private JSONArray statementsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (FinancialStatement s : statements) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
 }

@@ -5,6 +5,7 @@ import model.Loan;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// Source Credits: JsonSerializationDemo project from CPSC 210 repository
 public class JsonTest {
 
     //EFFECTS: tests if expected fields of a loan are equal to the actual fields of the object

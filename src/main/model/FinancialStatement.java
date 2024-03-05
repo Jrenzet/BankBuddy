@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistance.Writable;
+
 import java.lang.Math;
 
 // Represents financial statements having a fiscal year and financial data from that year
-public class FinancialStatement {
+public class FinancialStatement implements Writable {
 
     private int fiscalYear;
     private double netInc;
@@ -83,5 +86,17 @@ public class FinancialStatement {
 
     public void setPrincipleRepaid(double principleRepaid) {
         this.principleRepaid = principleRepaid;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("fiscalYear", fiscalYear);
+        json.put("netInc", netInc);
+        json.put("depExp", depExp);
+        json.put("intExp", intExp);
+        json.put("taxExp", taxExp);
+        json.put("principleRepaid", principleRepaid);
+        return json;
     }
 }

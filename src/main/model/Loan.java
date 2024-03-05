@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistance.Writable;
+
 import java.lang.Math;
+import java.nio.file.Watchable;
 
 //Represents a loan, with interest rate, term, and balance
-public class Loan {
+public class Loan implements Writable {
 
     private int remainingTerm;
     private double interestRate;
@@ -75,5 +79,16 @@ public class Loan {
 
     public void setProjection(boolean projection) {
         isProjection = projection;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("remainingTerm", remainingTerm);
+        json.put("interestRate", interestRate);
+        json.put("currentBalance", currentBalance);
+        json.put("isProjection", isProjection);
+        json.put("description", description);
+        return json;
     }
 }
