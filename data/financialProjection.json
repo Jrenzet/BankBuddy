@@ -1,0 +1,26 @@
+{
+    "loans": [
+        {
+            "interestRate": 5,
+            "isProjection": false,
+            "currentBalance": 1000,
+            "description": "testing",
+            "remainingTerm": 120
+        },
+        {
+            "interestRate": 6,
+            "isProjection": true,
+            "currentBalance": 2000,
+            "description": "test2",
+            "remainingTerm": 300
+        }
+    ],
+    "statements": [{
+        "principleRepaid": 300,
+        "taxExp": 2000,
+        "depExp": 1200,
+        "netInc": 1200,
+        "fiscalYear": 2023,
+        "intExp": 1200
+    }]
+}

@@ -3,17 +3,19 @@ package ui;
 import model.FinancialProjection;
 import model.FinancialStatement;
 import model.Loan;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
-import java.sql.SQLOutput;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Displays console prompts for the user to input loans, financial statements, and run projections
 // Source Credits: JsonSerializationDemo project from CPSC 210 repository
 public class FinancialPlanner {
 
-    private static final String SAVE_PATH = "./data/financialProjection.json";
+    private static final String JSON_PATH = "./data/financialProjection.json";
     private final Scanner input;
-    private final FinancialProjection projection;
+    private FinancialProjection projection;
     private Loan selectedLoan;
     private FinancialStatement selectedStatement;
     boolean running;
@@ -466,12 +468,27 @@ public class FinancialPlanner {
 
     //EFFECTS: saves current projection to ./data/financialProjection.json
     private void saveProjection() {
-
+        JsonWriter writer = new JsonWriter(JSON_PATH);
+        try {
+            writer.open();
+            writer.write(projection);
+            writer.close();
+            System.out.println("File saved to " + JSON_PATH + " successfully.");
+        } catch (IOException i) {
+            System.out.println("Invalid file name.");
+        }
     }
 
     //MODIFIES: this.projection
     //EFFECTS: loads projection from ./data/financialProjection.json
     private void loadProjection() {
+        try {
+            JsonReader reader = new JsonReader(JSON_PATH);
+            this.projection = reader.read();
+            System.out.println("File loaded from " + JSON_PATH + " successfully.");
+        } catch (IOException i) {
+            System.out.println("Invalid file name.");
+        }
     }
 }
 
