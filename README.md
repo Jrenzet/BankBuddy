@@ -34,6 +34,8 @@ could be very useful for some business owners.
 - As a user, I want the system to use stored information to automatically generate a projection with my expected DSC,
 while giving me the ability to edit aspects of this projection (i.e. loans and financial statements).
 - As a user, I want to be able to generate a rating of my likelihood of being approved for new debt.
+- As a user, I want to have the option to save the state of my projection before quitting the program.
+- As a user, I want to have the option to load my previously saved projection when starting up the program.
 
 
  

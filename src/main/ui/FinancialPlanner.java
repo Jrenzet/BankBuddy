@@ -6,6 +6,7 @@ import model.Loan;
 
 import java.util.Scanner;
 
+// Displays console prompts for the user to input loans, financial statements, and run projections
 public class FinancialPlanner {
 
     private final Scanner input;
@@ -14,6 +15,7 @@ public class FinancialPlanner {
     private FinancialStatement selectedStatement;
     boolean running;
 
+    //EFFECTS: constructs a financial planner and runs the ui
     public FinancialPlanner() {
         projection = new FinancialProjection();
         input = new Scanner(System.in);

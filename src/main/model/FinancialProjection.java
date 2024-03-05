@@ -10,7 +10,7 @@ public class FinancialProjection {
     private List<Loan> loans;
     private List<FinancialStatement> statements;
 
-
+    //EFFECTS: constructs a financial projection
     public FinancialProjection() {
         loans = new ArrayList<>();
         statements = new ArrayList<>();
