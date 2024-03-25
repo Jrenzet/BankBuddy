@@ -5,9 +5,19 @@ import model.FinancialStatement;
 import model.Loan;
 import persistance.JsonReader;
 import persistance.JsonWriter;
+import ui.buttons.LoanButton;
+import ui.buttons.ReportsButton;
+import ui.buttons.StatementButton;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 // Displays console prompts for the user to input loans, financial statements, and run projections
 // Source Credits: JsonSerializationDemo project from CPSC 210 repository
@@ -18,27 +28,34 @@ public class FinancialPlanner {
     private FinancialProjection projection;
     private Loan selectedLoan;
     private FinancialStatement selectedStatement;
-    boolean running;
+
+    private static final String TITLE = "Financial Planner";
+    private static final int HEIGHT = 600;
+    private static final int WIDTH = 800;
 
     //EFFECTS: constructs a financial planner and runs the ui
     public FinancialPlanner() {
+
+
         projection = new FinancialProjection();
+
         input = new Scanner(System.in);
-        running = true;
+
+
         runPlanner();
     }
 
+
+
     //EFFECTS: runs home screen and takes user input
     public void runPlanner() {
-        while (running) {
-            System.out.println("Financial Planner Home Page");
-            options1();
-            String input = takeInputString();
-            if (input.equals("q")) {
-                running = false;
-            } else {
-                inputHandlerHome(input);
-            }
+        System.out.println("Financial Planner Home Page");
+        options1();
+        String input = takeInputString();
+        if (input.equals("q")) {
+            System.exit(0);
+        } else {
+            inputHandlerHome(input);
         }
     }
 
@@ -96,6 +113,7 @@ public class FinancialPlanner {
                 System.out.println("Please type a valid command\n");
                 break;
         }
+        runPlanner();
     }
 
     //EFFECTS: initializes loan screen
@@ -124,7 +142,6 @@ public class FinancialPlanner {
             case "r":
                 remove("loan");
             case "m":
-                runPlanner();
                 break;
             default:
                 System.out.println("Please type a valid command\n");
@@ -219,7 +236,6 @@ public class FinancialPlanner {
                 remove("statement");
                 break;
             case "m":
-                runPlanner();
                 break;
             default:
                 System.out.println("Please type a valid command\n");
@@ -380,7 +396,6 @@ public class FinancialPlanner {
                 printLoans();
                 break;
             case "m":
-                runPlanner();
                 break;
             default:
                 reportsScreen();
@@ -467,7 +482,7 @@ public class FinancialPlanner {
     }
 
     //EFFECTS: saves current projection to ./data/financialProjection.json
-    private void saveProjection() {
+    public void saveProjection() {
         JsonWriter writer = new JsonWriter(JSON_PATH);
         try {
             writer.open();
@@ -481,7 +496,7 @@ public class FinancialPlanner {
 
     //MODIFIES: this.projection
     //EFFECTS: loads projection from ./data/financialProjection.json
-    private void loadProjection() {
+    public void loadProjection() {
         try {
             JsonReader reader = new JsonReader(JSON_PATH);
             this.projection = reader.read();
@@ -490,5 +505,10 @@ public class FinancialPlanner {
             System.out.println("Invalid file name.");
         }
     }
+
+    public FinancialProjection getProjection() {
+        return this.projection;
+    }
+
 }
 
