@@ -19,6 +19,7 @@ public class LoanButton extends JButton implements ActionListener {
     private final JButton editButton;
     private JButton addSubmit;
     private JButton editSubmit;
+    private JButton delete;
 
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -78,6 +79,8 @@ public class LoanButton extends JButton implements ActionListener {
                 saveLoan();
             } else if (e.getSource() == editSubmit) {
                 editLoan();
+            } else if (e.getSource() == delete) {
+                deleteLoan();
             }
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Please format submissions correctly");
@@ -143,6 +146,8 @@ public class LoanButton extends JButton implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates all text input boxes shown on the add loan screen
     public void initializeTextPanels() {
         JPanel termPanel = new JPanel();
         termBox = new JTextField(20);
@@ -194,18 +199,30 @@ public class LoanButton extends JButton implements ActionListener {
         newValueBox = new JTextField(20);
         newValueBoxPanel.add(newValueBox);
 
-        JPanel submitButtonPanel = new JPanel();
-        editSubmit = new JButton("Submit");
-        editSubmit.addActionListener(this);
-        submitButtonPanel.add(editSubmit);
-
         editPanel.add(fieldPanel);
         editPanel.add(fieldSelectionPanel);
         editPanel.add(newValuePanel);
         editPanel.add(newValueBoxPanel);
+
+        initializeEditButtons();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates buttons shown in edit loan window
+    public void initializeEditButtons() {
+        JPanel submitButtonPanel = new JPanel();
+        editSubmit = new JButton("Submit");
+        editSubmit.addActionListener(this);
+        submitButtonPanel.add(editSubmit);
+        delete = new JButton("Delete");
+        delete.addActionListener(this);
+        submitButtonPanel.add(delete);
+
         editPanel.add(submitButtonPanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates panels related ot user input of the desired loan number in the edit window
     public void initializeLoanNumberPanels() {
         JPanel numberPanel = new JPanel();
         numberPanel.add(new JLabel("First type the number of the loan you wish to edit"));
@@ -260,38 +277,25 @@ public class LoanButton extends JButton implements ActionListener {
     }
 
     // EFFECTS: sets the text boxes to be empty after submitting an edit
-    private void resetEditTextBoxes() {
+    public void resetEditTextBoxes() {
         newValueBox.setText("");
         loanNumberBox.setText("");
     }
 
     // EFFECTS: searches for loan number user submitted, if it exists update it to
     // user input
-    private void editLoan() throws LoanDoesNotExistException {
-        Loan loanToEdit = null;
+    public void editLoan() throws LoanDoesNotExistException {
+        Loan loanToEdit = searchLoan();
         if (newValueBox.getText().isEmpty()) {
             throw new RuntimeException();
-        } else if (loanNumberBox.getText().isEmpty()) {
-            throw new LoanDoesNotExistException();
-        } else {
-            for (Loan l : projection.getLoans()) {
-                if (projection.getLoans().indexOf(l) + 1 == Integer.parseInt(loanNumberBox.getText())) {
-                    loanToEdit = l;
-                    break;
-                }
-            }
-            if (loanToEdit == null) {
-                throw new LoanDoesNotExistException();
-            }
         }
-
         updateLoan(loanToEdit);
         refreshLoanList();
         resetEditTextBoxes();
     }
 
     //EFFECTS: clears list of loan description strings and updates it with current list
-    private void refreshLoanList() {
+    public void refreshLoanList() {
         listModel.removeAllElements();
         for (Loan loan : projection.getLoans()) {
             stringifyLoan(loan);
@@ -323,11 +327,41 @@ public class LoanButton extends JButton implements ActionListener {
                     throw new NumberFormatException();
                 }
                 break;
-
         }
     }
 
-    // EFFECTS: covnerts a loan into strings and adds to display on the view loan
+    //MODIFIES: this
+    //EFFECTS: deletes loan returned by searchLoan()
+    public void deleteLoan() throws LoanDoesNotExistException {
+        Loan loanToDelete = searchLoan();
+        int loanNumber = projection.getLoans().indexOf(loanToDelete) + 1;
+        projection.removeLoan(loanToDelete);
+        refreshLoanList();
+        resetEditTextBoxes();
+        JOptionPane.showMessageDialog(null, "Loan number "
+                + loanNumber + " deleted successfully");
+    }
+
+    //EFFECTS: returns loan matching the number inputted by the user in loanNumberBox, if one exists
+    public Loan searchLoan() throws LoanDoesNotExistException {
+        Loan foundLoan = null;
+        if (loanNumberBox.getText().isEmpty()) {
+            throw new LoanDoesNotExistException();
+        } else {
+            for (Loan l : projection.getLoans()) {
+                if (projection.getLoans().indexOf(l) + 1 == Integer.parseInt(loanNumberBox.getText())) {
+                    foundLoan = l;
+                    break;
+                }
+            }
+            if (foundLoan == null) {
+                throw new LoanDoesNotExistException();
+            }
+        }
+        return foundLoan;
+    }
+
+    // EFFECTS: converts a loan into strings and adds to display on the view loan
     // screen
     public void stringifyLoan(Loan loan) {
         listModel.addElement("**************************************************");

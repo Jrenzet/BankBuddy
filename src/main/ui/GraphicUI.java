@@ -22,25 +22,27 @@ public class GraphicUI implements ActionListener {
     private final FinancialProjection projection;
 
     private final JFrame mainWindow;
-    private static final String TITLE = "Financial Planner";
-    private static final int HEIGHT = 600;
-    private static final int WIDTH = 800;
+    private static final String TITLE = "BankBuddy";
 
     private JMenuItem save;
     private JMenuItem load;
+
+    LoanButton loanButton;
 
     private static final String JSON_PATH = "./data/financialProjection.json";
 
     public GraphicUI() {
         this.projection = new FinancialProjection();
         mainWindow = new JFrame(TITLE);
-        mainWindow.setSize(WIDTH, HEIGHT);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setLocationRelativeTo(null);
+
 
         loadMenu();
         loadStartScreen();
         loadButtons();
+
+        mainWindow.pack();
+        mainWindow.setLocationRelativeTo(null);
 
         mainWindow.setVisible(true);
 
@@ -51,14 +53,14 @@ public class GraphicUI implements ActionListener {
 
         JPanel buttonPanel = new JPanel();
 
-        LoanButton loanButton = new LoanButton(this.projection);
+        loanButton = new LoanButton(this.projection);
         buttonPanel.add(loanButton);
-
-        ReportsButton reportsButton = new ReportsButton();
-        buttonPanel.add(reportsButton);
 
         StatementButton statementButton = new StatementButton();
         buttonPanel.add(statementButton);
+
+        ReportsButton reportsButton = new ReportsButton();
+        buttonPanel.add(reportsButton);
 
         buttonPanel.setBackground(Color.lightGray);
         mainWindow.add(buttonPanel, BorderLayout.SOUTH);
@@ -87,8 +89,8 @@ public class GraphicUI implements ActionListener {
     //EFFECTS: adds home screen graphic to be displayed on start up
     public void loadStartScreen() {
         ImageIcon homeImage =
-                new ImageIcon(new ImageIcon("./data/homeScreenImage.jpg")
-                        .getImage().getScaledInstance(600, 600, Image.SCALE_SMOOTH));
+                new ImageIcon(new ImageIcon("./data/BankBuddy.png")
+                        .getImage());
         mainWindow.add(new JLabel(homeImage), BorderLayout.CENTER);
     }
 
@@ -127,6 +129,7 @@ public class GraphicUI implements ActionListener {
             for (FinancialStatement s : loadedProjection.getStatements()) {
                 this.projection.addStatement(s);
             }
+            loanButton.refreshLoanList();
             JOptionPane.showMessageDialog(null, "File loaded from " + JSON_PATH + " successfully.");
         } catch (IOException i) {
             System.out.println("Invalid file name.");
