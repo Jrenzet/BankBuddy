@@ -1,0 +1,36 @@
+{
+    "loans": [
+        {
+            "interestRate": 5.5,
+            "isProjection": false,
+            "currentBalance": 100000,
+            "description": "work truck",
+            "remainingTerm": 120
+        },
+        {
+            "interestRate": 6.3,
+            "isProjection": true,
+            "currentBalance": 350000,
+            "description": "new house",
+            "remainingTerm": 240
+        }
+    ],
+    "statements": [
+        {
+            "principleRepaid": 20000,
+            "taxExp": 2000,
+            "depExp": 20000,
+            "netInc": 50000,
+            "fiscalYear": 2022,
+            "intExp": 3000
+        },
+        {
+            "principleRepaid": 22000,
+            "taxExp": 2500,
+            "depExp": 25000,
+            "netInc": 60000,
+            "fiscalYear": 2023,
+            "intExp": 4000
+        }
+    ]
+}

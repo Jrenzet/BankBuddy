@@ -90,12 +90,6 @@ public class GraphicUI {
                 new ImageIcon(new ImageIcon("./data/homeScreenImage.jpg")
                         .getImage().getScaledInstance(600, 600, Image.SCALE_SMOOTH));
         mainWindow.add(new JLabel(homeImage), BorderLayout.CENTER);
-
-        JPanel buttonPanel = new JPanel();
-        JButton loanButton = new JButton();
-        buttonPanel.setBackground(Color.lightGray);
-        buttonPanel.add(new JLabel("Welcome"));
-        mainWindow.add(buttonPanel, BorderLayout.SOUTH);
     }
 
 

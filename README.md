@@ -24,7 +24,6 @@ could be very useful for some business owners.
 **Summary:**
 - Users can learn about their businesses financial health
 - Users can run their own projections
-- Application will print organized reports and visuals to show to financial institutions
 
 ## User Stories
 
@@ -37,5 +36,8 @@ while giving me the ability to edit aspects of this projection (i.e. loans and f
 - As a user, I want to have the option to save the state of my projection before quitting the program.
 - As a user, I want to have the option to load my previously saved projection when starting up the program.
 
+## Sources
+- JsonSerializationDemo project from CPSC 210 repository
+- ListDemo Oracle, Java Documentation
 
  
