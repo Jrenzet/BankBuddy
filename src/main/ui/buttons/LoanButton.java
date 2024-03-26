@@ -88,7 +88,7 @@ public class LoanButton extends JButton implements ActionListener {
                 resetAddTextBoxes();
             } else if (e.getSource() == editSubmit) {
                 editLoan();
-                // resetEditTextBoxes();
+                resetEditTextBoxes();
             }
         } catch (NumberFormatException n) {
             JOptionPane.showMessageDialog(null, "Please format submissions correctly");
@@ -281,8 +281,9 @@ public class LoanButton extends JButton implements ActionListener {
         }
         updateLoan(loanToEdit);
         listModel.removeAllElements();
-        initializeDisplayPanel();
-        printLoans();
+        for (Loan loan : projection.getLoans()) {
+            stringifyLoan(loan);
+        }
     }
 
     private void updateLoan(Loan loanToEdit) {
@@ -324,25 +325,6 @@ public class LoanButton extends JButton implements ActionListener {
         listModel.addElement("\n Remaining Term: " + loan.getRemainingTerm() + " Months");
         listModel.addElement("\n Interest Rate: " + loan.getInterestRate() + "%\n");
         listModel.addElement("**************************************************");
-    }
-
-
-
-    public void printLoan(Loan printedLoan) {
-        System.out.println("Loan Number: " + (projection.getLoans().indexOf(printedLoan) + 1));
-        if (printedLoan.isProjection()) {
-            System.out.println("**** Projected Loan ****");
-        }
-        System.out.println("Description: " + printedLoan.getDescription());
-        System.out.println("Balance: $" + printedLoan.getCurrentBalance());
-        System.out.println("Remaining Term: " + printedLoan.getRemainingTerm() + " Months");
-        System.out.println("Interest Rate: " + printedLoan.getInterestRate() + "%\n");
-    }
-
-    public void printLoans() {
-        for (Loan l : projection.getLoans()) {
-            printLoan(l);
-        }
     }
 
 }
