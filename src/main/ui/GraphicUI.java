@@ -19,7 +19,7 @@ import java.io.IOException;
 // Creates and runs the main GUI for this application
 public class GraphicUI implements ActionListener {
 
-    private FinancialProjection projection;
+    private final FinancialProjection projection;
 
     private final JFrame mainWindow;
     private static final String TITLE = "Financial Planner";
@@ -63,16 +63,6 @@ public class GraphicUI implements ActionListener {
         buttonPanel.setBackground(Color.lightGray);
         mainWindow.add(buttonPanel, BorderLayout.SOUTH);
 
-    }
-
-    //EFFECTS: creates sidebar and adds to main display
-    public void loadSidebar() {
-        JTabbedPane sidebar = new JTabbedPane();
-        sidebar.setTabPlacement(JTabbedPane.LEFT);
-        JPanel statementsTab = new JPanel();
-        sidebar.add(statementsTab, 0);
-        sidebar.setTitleAt(0, "Financial Statements");
-        mainWindow.add(sidebar);
     }
 
     //EFFECTS: loads menu options
