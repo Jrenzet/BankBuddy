@@ -1,19 +1,23 @@
 package ui;
 
 import model.FinancialProjection;
+import model.FinancialStatement;
+import model.Loan;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 import ui.buttons.LoanButton;
 import ui.buttons.ReportsButton;
 import ui.buttons.StatementButton;
-import ui.menu.FileMenu;
-import ui.menu.ProgramMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 // Source Credits: LongFormProblemStarters project from CPSC 210 repository
 // Creates and runs the main GUI for this application
-public class GraphicUI {
+public class GraphicUI implements ActionListener {
 
     private FinancialProjection projection;
 
@@ -22,8 +26,10 @@ public class GraphicUI {
     private static final int HEIGHT = 600;
     private static final int WIDTH = 800;
 
-    private FileMenu file;
-    private ProgramMenu program;
+    private JMenuItem save;
+    private JMenuItem load;
+
+    private static final String JSON_PATH = "./data/financialProjection.json";
 
     public GraphicUI() {
         this.projection = new FinancialProjection();
@@ -37,8 +43,6 @@ public class GraphicUI {
         loadButtons();
 
         mainWindow.setVisible(true);
-
-
 
     }
 
@@ -74,12 +78,18 @@ public class GraphicUI {
     //EFFECTS: loads menu options
     public void loadMenu() {
 
-        file = new FileMenu("File");
-        program = new ProgramMenu("Program");
+        JMenu file = new JMenu("File");
+        save = new JMenuItem("Save");
+        load = new JMenuItem("Load");
+
+        save.addActionListener(this);
+        load.addActionListener(this);
+
+        file.add(save);
+        file.add(load);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(file);
-        menuBar.add(program);
 
         mainWindow.setJMenuBar(menuBar);
     }
@@ -92,5 +102,45 @@ public class GraphicUI {
         mainWindow.add(new JLabel(homeImage), BorderLayout.CENTER);
     }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == save) {
+            saveProjection();
+        } else if (e.getSource() == load) {
+            loadProjection();
+        }
+    }
+
+    //EFFECTS: saves current projection to ./data/financialProjection.json
+    public void saveProjection() {
+        JsonWriter writer = new JsonWriter(JSON_PATH);
+        try {
+            writer.open();
+            writer.write(projection);
+            writer.close();
+            JOptionPane.showMessageDialog(null, "File saved to " + JSON_PATH + " successfully.");
+        } catch (IOException i) {
+            System.out.println("Invalid file name.");
+        }
+    }
+
+    //MODIFIES: this.projection
+    //EFFECTS: loads projection from ./data/financialProjection.json
+    public void loadProjection() {
+        try {
+            JsonReader reader = new JsonReader(JSON_PATH);
+            FinancialProjection loadedProjection = reader.read();
+            for (Loan l : loadedProjection.getLoans()) {
+                this.projection.addLoan(l);
+            }
+            for (FinancialStatement s : loadedProjection.getStatements()) {
+                this.projection.addStatement(s);
+            }
+            JOptionPane.showMessageDialog(null, "File loaded from " + JSON_PATH + " successfully.");
+        } catch (IOException i) {
+            System.out.println("Invalid file name.");
+        }
+    }
 
 }

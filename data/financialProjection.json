@@ -1,4 +1,26 @@
 {
-    "loans": [],
+    "loans": [
+        {
+            "interestRate": 6,
+            "isProjection": false,
+            "currentBalance": 6,
+            "description": "test",
+            "remainingTerm": 6
+        },
+        {
+            "interestRate": 7,
+            "isProjection": false,
+            "currentBalance": 7,
+            "description": "7",
+            "remainingTerm": 7
+        },
+        {
+            "interestRate": 1,
+            "isProjection": false,
+            "currentBalance": 1,
+            "description": "1",
+            "remainingTerm": 1
+        }
+    ],
     "statements": []
 }
