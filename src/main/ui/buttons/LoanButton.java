@@ -118,6 +118,7 @@ public class LoanButton extends JButton implements ActionListener {
         loanHomePage.add(cardPanel, BorderLayout.CENTER);
 
         loanHomePage.pack();
+        loanHomePage.setLocationRelativeTo(null);
         loanHomePage.setVisible(true);
     }
 

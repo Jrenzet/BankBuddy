@@ -36,6 +36,22 @@ while giving me the ability to edit aspects of this projection (i.e. loans and f
 - As a user, I want to have the option to save the state of my projection before quitting the program.
 - As a user, I want to have the option to load my previously saved projection when starting up the program.
 
+# Instructions for Grader
+
+- You can generate the first required action related to the user story "adding multiple loans to a financial projection"
+by clicking the "Loans" button, filling in all boxes (integer for remaining term, double for interest rate and balance, 
+and string for "what is this loan for"), the clicking submit. A loan with the entered information has now been added to
+the financial projection.
+- You can generate the second required action related to the user story "adding multiple loans to a financial 
+projection" by clicking the "Loans" button, then clicking the "Edit Loans" button, filling in the loan number field with
+an integer (equal to the number of a loan that has been added), selecting an option form the dropdown box, inputting a
+value to replace the old one, then clicking submit. The specified loan has now been edited with your inputted value.
+- You can view all loans that have been added to the projection  by clicking the view loans button, which displays all 
+loans and will reflect any user changes.
+- You can locate my visual component by starting up the application, there is an image displayed on the home screen.
+- You can save the state of my application by clicking the file menu item on the home screen, then clicking save.
+- You can reload the state of my application by clicking the file menu item on the home screen, then clicking load.
+
 ## Sources
 - JsonSerializationDemo project from CPSC 210 repository
 - ListDemo Oracle, Java Documentation
