@@ -3,7 +3,6 @@ package ui.buttons;
 import model.FinancialProjection;
 import model.Loan;
 
-import javax.management.RuntimeErrorException;
 import javax.swing.*;
 
 import exceptions.LoanDoesNotExistException;
@@ -31,9 +30,6 @@ public class LoanButton extends JButton implements ActionListener {
     private JScrollPane displayPanel;
 
     private DefaultListModel<String> listModel;
-
-    private static final int HEIGHT = 600;
-    private static final int WIDTH = 800;
 
     private static final String ADDSTRING = "add";
     private static final String EDITSTRING = "edit";
@@ -99,7 +95,7 @@ public class LoanButton extends JButton implements ActionListener {
         }
     }
 
-    // MODIFIES: loanHomePage
+    // MODIFIES: this
     // EFFECTS: generates first page user sees when they select loan button
     public void openLoanPage() {
         loanHomePage = new JFrame();
@@ -128,6 +124,7 @@ public class LoanButton extends JButton implements ActionListener {
         loanHomePage.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up all components of the add screen
     public void initializeAddPanel() {
 
@@ -174,6 +171,7 @@ public class LoanButton extends JButton implements ActionListener {
 
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up all components of the edit screen
     public void initializeEditPanel() {
         editPanel = new JPanel();
@@ -215,6 +213,7 @@ public class LoanButton extends JButton implements ActionListener {
         editPanel.add(submitButtonPanel);
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up all components of the view loans screen
     public void initializeDisplayPanel() {
         JList<String> list = new JList<>();
@@ -225,9 +224,9 @@ public class LoanButton extends JButton implements ActionListener {
         list.setModel(listModel);
         list.setVisibleRowCount(5);
         displayPanel = new JScrollPane(list);
-        System.out.println("initilaized");
     }
 
+    // MODIFIES: this
     // EFFECTS: saves a new loan to the projection as per the users inputs
     public void saveLoan() {
         if (descriptionBox.getText().isEmpty() ||
@@ -250,7 +249,7 @@ public class LoanButton extends JButton implements ActionListener {
         }
     }
 
-    // EFFECTS: sets the text boxes to be empty after submitting
+    // EFFECTS: sets the text boxes to be empty after submitting a new loan
     public void resetAddTextBoxes() {
         descriptionBox.setText("");
         balanceBox.setText("");
@@ -258,27 +257,30 @@ public class LoanButton extends JButton implements ActionListener {
         termBox.setText("");
     }
 
+    // EFFECTS: sets the text boxes to be empty after submitting an edit
     private void resetEditTextBoxes() {
         newValueBox.setText("");
         loanNumberBox.setText("");
-        
+
     }
 
-    private void editLoan() throws LoanDoesNotExistException{
+    // EFFECTS: searches for loan number user submitted, if it exists update it to
+    // user input
+    private void editLoan() throws LoanDoesNotExistException {
         Loan loanToEdit = null;
-        if (newValueBox.getText().isEmpty() || loanNumberBox.getText().isEmpty()) {
-            throw new RuntimeException();
-        } else {
-            for (Loan l: projection.getLoans()) {
-                if (projection.getLoans().indexOf(l) + 1 == Integer.valueOf(loanNumberBox.getText())) {
-                    loanToEdit = l;
-                    break;
-                }
-            }
-            if (loanToEdit == null) {
-                throw new LoanDoesNotExistException();
+        for (Loan l : projection.getLoans()) {
+            if (projection.getLoans().indexOf(l) + 1 == Integer.valueOf(loanNumberBox.getText())) {
+                loanToEdit = l;
+                break;
             }
         }
+        if (loanToEdit == null) {
+            throw new LoanDoesNotExistException();
+        }
+        if (newValueBox.getText().isEmpty() || loanNumberBox.getText().isEmpty()) {
+            throw new RuntimeException();
+        }
+
         updateLoan(loanToEdit);
         listModel.removeAllElements();
         for (Loan loan : projection.getLoans()) {
@@ -286,10 +288,12 @@ public class LoanButton extends JButton implements ActionListener {
         }
     }
 
+    // MODIFIES: loanToEdit
+    // EFFECTS: updates loanToEdit according to user submitted field and value
     private void updateLoan(Loan loanToEdit) {
         switch (String.valueOf(editBox.getSelectedItem())) {
             case "Description":
-               loanToEdit.setDescription(newValueBox.getText());
+                loanToEdit.setDescription(newValueBox.getText());
                 break;
             case "Loan Term":
                 loanToEdit.setRemainingTerm(Integer.valueOf(newValueBox.getText()));
@@ -309,11 +313,12 @@ public class LoanButton extends JButton implements ActionListener {
                     throw new RuntimeException();
                 }
                 break;
-            
+
         }
     }
 
-    // EFFECTS: covnerts a loan into strings for display on the view loan screen
+    // EFFECTS: covnerts a loan into strings and adds to display on the view loan
+    // screen
     public void stringifyLoan(Loan loan) {
         listModel.addElement("**************************************************");
         listModel.addElement("Loan Number: " + (projection.getLoans().indexOf(loan) + 1));
