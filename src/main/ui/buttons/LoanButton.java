@@ -10,6 +10,7 @@ import exceptions.LoanDoesNotExistException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 //generates all JFrame windows related to adding and editing loans
 public class LoanButton extends JButton implements ActionListener {
@@ -45,6 +46,8 @@ public class LoanButton extends JButton implements ActionListener {
     private JComboBox<String> editBox;
     private JTextField newValueBox;
     private JTextField loanNumberBox;
+
+    private static final DecimalFormat decFormat = new DecimalFormat("0.00");
 
     // EFFECTS: creates the button which initially takes the user to the loan
     // options screen
@@ -371,9 +374,10 @@ public class LoanButton extends JButton implements ActionListener {
             listModel.addElement("\n **** Projected Loan ****");
         }
         listModel.addElement("\n Description: " + loan.getDescription());
-        listModel.addElement("\n Balance: $" + loan.getCurrentBalance());
+        listModel.addElement("\n Balance: $" + decFormat.format(loan.getCurrentBalance()));
         listModel.addElement("\n Remaining Term: " + loan.getRemainingTerm() + " Months");
-        listModel.addElement("\n Interest Rate: " + loan.getInterestRate() + "%\n");
+        listModel.addElement("\n Interest Rate: " + decFormat.format(loan.getInterestRate()) + "%");
+        listModel.addElement("\n Monthly Payment: $" + decFormat.format(loan.calculateMonthlyPayment()));
         listModel.addElement("**************************************************");
     }
 

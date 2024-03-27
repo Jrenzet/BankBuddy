@@ -129,7 +129,11 @@ public class GraphicUI implements ActionListener {
             for (FinancialStatement s : loadedProjection.getStatements()) {
                 this.projection.addStatement(s);
             }
-            loanButton.refreshLoanList();
+            try {
+                loanButton.refreshLoanList();
+            } catch (NullPointerException n) {
+                //do nothing, loan button not yet clicked and loan display list is null
+            }
             JOptionPane.showMessageDialog(null, "File loaded from " + JSON_PATH + " successfully.");
         } catch (IOException i) {
             System.out.println("Invalid file name.");
