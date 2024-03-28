@@ -20,6 +20,13 @@
             "currentBalance": 5000,
             "description": "Jetski",
             "remainingTerm": 60
+        },
+        {
+            "interestRate": 4,
+            "isProjection": false,
+            "currentBalance": 4000,
+            "description": "vending machine",
+            "remainingTerm": 20
         }
     ],
     "statements": []

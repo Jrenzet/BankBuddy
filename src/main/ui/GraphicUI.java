@@ -27,7 +27,8 @@ public class GraphicUI implements ActionListener {
     private JMenuItem save;
     private JMenuItem load;
 
-    LoanButton loanButton;
+    private LoanButton loanButton;
+    private StatementButton statementButton;
 
     private static final String JSON_PATH = "./data/financialProjection.json";
 
@@ -56,7 +57,7 @@ public class GraphicUI implements ActionListener {
         loanButton = new LoanButton(this.projection);
         buttonPanel.add(loanButton);
 
-        StatementButton statementButton = new StatementButton();
+        statementButton = new StatementButton(this.projection);
         buttonPanel.add(statementButton);
 
         ReportsButton reportsButton = new ReportsButton();
