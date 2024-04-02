@@ -1,32 +1,18 @@
 {
     "loans": [
         {
-            "interestRate": 6.3,
+            "interestRate": 1,
             "isProjection": false,
-            "currentBalance": 10000,
-            "description": "Car",
-            "remainingTerm": 120
+            "currentBalance": 1,
+            "description": "1",
+            "remainingTerm": 1
         },
         {
-            "interestRate": 4.5,
+            "interestRate": 2,
             "isProjection": false,
-            "currentBalance": 200000,
-            "description": "House",
-            "remainingTerm": 240
-        },
-        {
-            "interestRate": 7.3,
-            "isProjection": true,
-            "currentBalance": 5000,
-            "description": "Jetski",
-            "remainingTerm": 60
-        },
-        {
-            "interestRate": 4,
-            "isProjection": false,
-            "currentBalance": 4000,
-            "description": "vending machine",
-            "remainingTerm": 20
+            "currentBalance": 2,
+            "description": "2",
+            "remainingTerm": 2
         }
     ],
     "statements": []

@@ -5,7 +5,7 @@ import model.Loan;
 
 import javax.swing.*;
 
-import exceptions.LoanDoesNotExistException;
+import exceptions.ItemDoesNotExistException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -89,7 +89,7 @@ public class LoanButton extends JButton implements ActionListener {
             JOptionPane.showMessageDialog(null, "Please format submissions correctly");
         } catch (RuntimeException r) {
             JOptionPane.showMessageDialog(null, "Please complete all fields");
-        } catch (LoanDoesNotExistException l) {
+        } catch (ItemDoesNotExistException l) {
             JOptionPane.showMessageDialog(null, "This loan was not found");
         }
     }
@@ -226,7 +226,7 @@ public class LoanButton extends JButton implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates panels related ot user input of the desired loan number in the edit window
+    // EFFECTS: creates panels related to user input of the desired loan number in the edit window
     public void initializeLoanNumberPanels() {
         JPanel numberPanel = new JPanel();
         numberPanel.add(new JLabel("First type the number of the loan you wish to edit"));
@@ -288,7 +288,7 @@ public class LoanButton extends JButton implements ActionListener {
 
     // EFFECTS: searches for loan number user submitted, if it exists update it to
     // user input
-    public void editLoan() throws LoanDoesNotExistException {
+    public void editLoan() throws ItemDoesNotExistException {
         Loan loanToEdit = searchLoan();
         if (newValueBox.getText().isEmpty()) {
             throw new RuntimeException();
@@ -336,7 +336,7 @@ public class LoanButton extends JButton implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: deletes loan returned by searchLoan()
-    public void deleteLoan() throws LoanDoesNotExistException {
+    public void deleteLoan() throws ItemDoesNotExistException {
         Loan loanToDelete = searchLoan();
         int loanNumber = projection.getLoans().indexOf(loanToDelete) + 1;
         projection.removeLoan(loanToDelete);
@@ -347,10 +347,10 @@ public class LoanButton extends JButton implements ActionListener {
     }
 
     //EFFECTS: returns loan matching the number inputted by the user in loanNumberBox, if one exists
-    public Loan searchLoan() throws LoanDoesNotExistException {
+    public Loan searchLoan() throws ItemDoesNotExistException {
         Loan foundLoan = null;
         if (loanNumberBox.getText().isEmpty()) {
-            throw new LoanDoesNotExistException();
+            throw new ItemDoesNotExistException();
         } else {
             for (Loan l : projection.getLoans()) {
                 if (projection.getLoans().indexOf(l) + 1 == Integer.parseInt(loanNumberBox.getText())) {
@@ -359,7 +359,7 @@ public class LoanButton extends JButton implements ActionListener {
                 }
             }
             if (foundLoan == null) {
-                throw new LoanDoesNotExistException();
+                throw new ItemDoesNotExistException();
             }
         }
         return foundLoan;

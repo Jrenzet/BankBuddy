@@ -60,7 +60,7 @@ public class GraphicUI implements ActionListener {
         statementButton = new StatementButton(this.projection);
         buttonPanel.add(statementButton);
 
-        ReportsButton reportsButton = new ReportsButton();
+        ReportsButton reportsButton = new ReportsButton(this.projection);
         buttonPanel.add(reportsButton);
 
         buttonPanel.setBackground(Color.lightGray);
@@ -134,6 +134,11 @@ public class GraphicUI implements ActionListener {
                 loanButton.refreshLoanList();
             } catch (NullPointerException n) {
                 //do nothing, loan button not yet clicked and loan display list is null
+            }
+            try {
+                statementButton.refreshStatementList();
+            } catch (NullPointerException n) {
+                //do nothing, statement button not yet clicked and loan display list is null
             }
             JOptionPane.showMessageDialog(null, "File loaded from " + JSON_PATH + " successfully.");
         } catch (IOException i) {
