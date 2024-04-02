@@ -24,6 +24,8 @@ public class FinancialProjection implements Writable {
     //EFFECTS: adds Loan instance to loans
     public void addLoan(Loan newLoan) {
         loans.add(newLoan);
+        EventLog.getInstance().logEvent(new Event("Loan for " + newLoan.getDescription()
+                + " added to projection"));
     }
 
     //MODIFIES: this
@@ -37,6 +39,8 @@ public class FinancialProjection implements Writable {
     //EFFECTS: removes Loan instance from loans
     public void removeLoan(Loan oldLoan) {
         loans.remove(oldLoan);
+        EventLog.getInstance().logEvent(new Event("Loan for " + oldLoan.getDescription()
+                + " removed from projection"));
     }
 
     //REQUIRES: statements.contains(oldStatement) == true

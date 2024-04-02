@@ -1,5 +1,6 @@
 package ui;
 
+import model.EventLog;
 import model.FinancialProjection;
 import model.FinancialStatement;
 import model.Loan;
@@ -13,11 +14,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
+import model.Event;
 
 // Source Credits: LongFormProblemStarters project from CPSC 210 repository
 // Creates and runs the main GUI for this application
-public class GraphicUI implements ActionListener {
+public class GraphicUI implements ActionListener, WindowListener {
 
     private final FinancialProjection projection;
 
@@ -36,6 +40,7 @@ public class GraphicUI implements ActionListener {
         this.projection = new FinancialProjection();
         mainWindow = new JFrame(TITLE);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainWindow.addWindowListener(this);
 
 
         loadMenu();
@@ -146,4 +151,39 @@ public class GraphicUI implements ActionListener {
         }
     }
 
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event event:EventLog.getInstance()) {
+            System.out.println(event.toString());
+        }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }

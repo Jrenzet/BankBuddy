@@ -56,4 +56,17 @@ loans and will reflect any user changes.
 - JsonSerializationDemo project from CPSC 210 repository
 - ListDemo Oracle, Java Documentation
 
- 
+# Phase 4: Task 2
+- User adds a loan with descriptions "Car". 
+- User adds a loan with the description "House". 
+- User deletes loan with
+description "Car". 
+
+The following event log is printed on close:
+
+Tue Apr 02 15:01:00 PDT 2024 <br/>
+Loan for Car added to projection <br/>
+Tue Apr 02 15:01:06 PDT 2024 <br/>
+Loan for House added to projection <br/>
+Tue Apr 02 15:01:10 PDT 2024 <br/>
+Loan for Car removed from projection <br/>
