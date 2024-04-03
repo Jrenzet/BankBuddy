@@ -70,3 +70,13 @@ Tue Apr 02 15:01:06 PDT 2024 <br/>
 Loan for House added to projection <br/>
 Tue Apr 02 15:01:10 PDT 2024 <br/>
 Loan for Car removed from projection <br/>
+
+# Phase 4: Task 3
+Looking at my design diagram, there are two refactors I would consider to improve my program. The first would be to 
+reduce the coupling between GraphicUI, the button classes, and FinancialProjections. I would implement the singleton 
+pattern to allow the buttons to access the single financial projection on their own, without having the projection 
+passed to them. That way the projection would be saved within its own class, and would not need to be saved as a field 
+in all these classes. The second refactoring I would consider is to make an abstract class called button, which 
+ReportsButton, StatementButton, and LoanButton would extend, to abstract out some of the repetitive methods in these 
+classes. Then I would refactor GrpahicUI to have a field with a list of buttons (of type of the abstract class). This
+would help reduce repetitive code and allow for easy addition of more buttons in the future.
