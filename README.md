@@ -5,9 +5,9 @@
 **Description:**
 
 This application allows the user to input specific line items from their past financial statements, along with information
-about their current debt, and calculate their Debt Service Coverage (a key metric used by banks to evaluate cahs flow). The user 
-also has the option to add potential new loans and see the impact the increase in debt would have on their payments and Debt Service, 
-and generate a rpeort showing the likelihood of approval for the new debt. Finally, the user has the ability to edit metrics such as 
+about their current debt, and calculate their Debt Service Coverage (a key metric used by banks to evaluate cash flow). The user 
+also has the option to add new loans and see the impact the increase in debt would have on their payments and Debt Service, 
+and generate a report showing the likelihood of approval for the new debt. Finally, the user has the ability to edit metrics such as 
 interest rates, allowing them to see what their Debt Service looks like under different economic conditions.
 
 The user of this application will be any business owner or controller of a small to medium size business who is 
