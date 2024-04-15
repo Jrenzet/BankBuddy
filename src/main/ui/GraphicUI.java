@@ -19,7 +19,6 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import model.Event;
 
-// Source Credits: LongFormProblemStarters project from CPSC 210 repository
 // Creates and runs the main GUI for this application
 public class GraphicUI implements ActionListener, WindowListener {
 
