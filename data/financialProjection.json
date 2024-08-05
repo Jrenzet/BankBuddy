@@ -1,19 +1,51 @@
 {
     "loans": [
         {
-            "interestRate": 1,
+            "interestRate": 5,
             "isProjection": false,
-            "currentBalance": 1,
-            "description": "1",
-            "remainingTerm": 1
+            "currentBalance": 30000,
+            "description": "Car",
+            "remainingTerm": 120
         },
         {
-            "interestRate": 2,
+            "interestRate": 6,
             "isProjection": false,
-            "currentBalance": 2,
-            "description": "2",
-            "remainingTerm": 2
+            "currentBalance": 200000,
+            "description": "House",
+            "remainingTerm": 240
+        },
+        {
+            "interestRate": 7,
+            "isProjection": true,
+            "currentBalance": 50000,
+            "description": "Boat",
+            "remainingTerm": 60
         }
     ],
-    "statements": []
+    "statements": [
+        {
+            "principleRepaid": 3000,
+            "taxExp": 1000,
+            "depExp": 3000,
+            "netInc": 40000,
+            "fiscalYear": 2021,
+            "intExp": 2000
+        },
+        {
+            "principleRepaid": 2000,
+            "taxExp": 1500,
+            "depExp": 2000,
+            "netInc": 55000,
+            "fiscalYear": 2022,
+            "intExp": 4000
+        },
+        {
+            "principleRepaid": 4000,
+            "taxExp": 1000,
+            "depExp": 3000,
+            "netInc": 45000,
+            "fiscalYear": 2023,
+            "intExp": 2000
+        }
+    ]
 }

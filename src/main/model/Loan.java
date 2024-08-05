@@ -20,11 +20,16 @@ public class Loan implements Writable {
         this.description = description;
     }
 
-    //REQUIRES: remainingTerm > 0 && interestRate > 0
+    //REQUIRES: remainingTerm > 0 && interestRate >= 0
     //EFFECTS: calculates the current monthly payment on this loan, rounded to the nearest dollar
     public double calculateMonthlyPayment() {
-        double result = (this.currentBalance * (this.interestRate / 1200))
-                / (1 - Math.pow((1 + (this.interestRate / 1200)), -this.remainingTerm));
+        double result;
+        if (this.interestRate == 0) {
+            result = this.currentBalance / this.remainingTerm;
+        } else {
+            result = (this.currentBalance * (this.interestRate / 1200))
+                    / (1 - (1 / Math.pow((1 + (this.interestRate / 1200)), this.remainingTerm)));
+        }
         return Math.round(result);
     }
 

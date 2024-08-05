@@ -67,28 +67,30 @@ public class FinancialProjectionTest {
         testStmt6.setIntExp(0);
         testStmt6.setTaxExp(0);
 
+
         testLoan1 = new Loan("property");
-        testLoan2 = new Loan("almost paid");
-        testLoan3 = new Loan("vehicle");
-        testLoan4 = new Loan("projected machine");
-        testLoan5 = new Loan("old loan");
-
         testLoan1.setInterestRate(5.55);
-        testLoan2.setInterestRate(6.0);
-        testLoan3.setInterestRate(2.20);
-        testLoan4.setInterestRate(7);
-        testLoan5.setInterestRate(3.43);
-
         testLoan1.setRemainingTerm(300);
-        testLoan2.setRemainingTerm(10);
-        testLoan3.setRemainingTerm(240);
-        testLoan4.setRemainingTerm(60);
-        testLoan5.setRemainingTerm(6);
-
         testLoan1.setCurrentBalance(100000);
+
+        testLoan2 = new Loan("almost paid");
+        testLoan2.setInterestRate(6.0);
+        testLoan2.setRemainingTerm(10);
         testLoan2.setCurrentBalance(5000);
+
+        testLoan3 = new Loan("vehicle");
+        testLoan3.setInterestRate(2.20);
+        testLoan3.setRemainingTerm(240);
         testLoan3.setCurrentBalance(1000000);
+
+        testLoan4 = new Loan("projected machine");
+        testLoan4.setInterestRate(7);
+        testLoan4.setRemainingTerm(60);
         testLoan4.setCurrentBalance(75000);
+
+        testLoan5 = new Loan("old loan");
+        testLoan5.setInterestRate(3.43);
+        testLoan5.setRemainingTerm(6);
         testLoan5.setCurrentBalance(22500);
 
     }
@@ -114,9 +116,12 @@ public class FinancialProjectionTest {
         testProj1.addLoan(testLoan1);
         testProj1.addLoan(testLoan2);
         testProj1.removeLoan(testLoan2);
+        // assert other loans were not affected
         assertFalse(testProj1.getLoans().contains(testLoan2));
+        // assert intended loan was removed
         assertTrue(testProj1.getLoans().contains(testLoan1));
         testProj1.removeLoan(testLoan1);
+        // assert removal occurs properly when projection is empty after
         assertFalse(testProj1.getLoans().contains(testLoan1));
     }
 
@@ -125,8 +130,11 @@ public class FinancialProjectionTest {
         testProj1.addStatement(testStmt1);
         testProj1.addStatement(testStmt2);
         testProj1.removeStatement(testStmt2);
+        // assert other statements were not affected
         assertFalse(testProj1.getStatements().contains(testStmt2));
+        // assert intended statement was removed
         assertTrue(testProj1.getStatements().contains(testStmt1));
+        // assert removal occurs properly when projection is empty after
         testProj1.removeStatement(testStmt1);
         assertFalse(testProj1.getStatements().contains(testStmt1));
     }
@@ -189,6 +197,7 @@ public class FinancialProjectionTest {
         testProj1.addStatement(testStmt1);
         testProj1.addStatement(testStmt2);
         testProj1.addLoan(testLoan4);
+
         assertEquals("Green", testProj1.projectionRating()); //DSC of 1.96
     }
 
